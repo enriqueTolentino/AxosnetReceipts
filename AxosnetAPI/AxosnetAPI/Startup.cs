@@ -34,6 +34,7 @@ namespace AxosnetAPI
             // Model validations with filters
             services.AddScoped<ValidateModel<Receipt>>();
             services.AddScoped<ValidateEntityExists<Receipt>>();
+            services.AddScoped<ValidateEntityExists<Currency>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
