@@ -49,11 +49,6 @@ namespace AxosnetAPI.Controllers
                         Include(receipt => receipt.Currency).
                         FirstOrDefault(receipt => receipt.IdReceipt == id.Value);
 
-                    if(receipt == null)
-                    {
-                        return NotFound();
-                    }
-
                     return Ok(receipt);
                 }
             }
@@ -74,7 +69,7 @@ namespace AxosnetAPI.Controllers
             {
                 using(db = new AxosnetAPIContext())
                 {
-                    db.Add(receipt);
+                    db.Receipts.Add(receipt);
                     db.SaveChanges();
 
                     return Ok(receipt);
@@ -86,16 +81,49 @@ namespace AxosnetAPI.Controllers
             }
         }
 
-        // PUT: api/Receipts/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // Post: api/Receipts/5
+        [HttpPost("{id:int?}")]
+        [ServiceFilter(typeof(ValidateEntityExists<Receipt>))]
+        [ServiceFilter(typeof(ValidateModel<Receipt>))]
+        public ActionResult Edit(int? id, [Bind("IdReceipt,ProviderCode,Amount,Date,Comments,IdCurrency")]
+                        [FromBody] Receipt receipt)
         {
+            try
+            {
+                using (db = new AxosnetAPIContext())
+                {
+                    db.Update(receipt);
+                    db.SaveChanges();
+
+                    return Ok(receipt);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id:int?}")]
+        [ServiceFilter(typeof(ValidateEntityExists<Receipt>))]
+        public ActionResult Delete(int? id)
         {
+            try
+            {
+                using (db = new AxosnetAPIContext())
+                {
+                    Receipt receipt = db.Receipts.Find(id);
+                    db.Receipts.Remove(receipt);
+                    db.SaveChanges();
+
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
     }
 }
