@@ -24,7 +24,7 @@ namespace AxosnetAPI.Filters
                     }
                     else
                     {
-                        context.Result = new BadRequestObjectResult("Bad id parameter");
+                        context.Result = new BadRequestObjectResult(new { message = "Bad id parameter"});
                         return;
                     }
 

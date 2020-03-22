@@ -16,7 +16,7 @@ namespace AxosnetAPI.Filters
                 var param = context.ActionArguments.SingleOrDefault(p => p.Value is T);
                 if (param.Value == null)
                 {
-                    context.Result = new BadRequestObjectResult("Object is null");
+                    context.Result = new BadRequestObjectResult(new { message = "Object is null" });
                     return;
                 }
 

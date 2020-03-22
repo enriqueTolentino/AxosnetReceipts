@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AxosnetAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using AxosnetAPI.Filters;
 
 namespace AxosnetAPI.Controllers
 {
@@ -23,7 +24,8 @@ namespace AxosnetAPI.Controllers
             {
                 using (db = new AxosnetAPIContext())
                 {
-                    List<Receipt> receipts = db.Receipts.ToList();
+                    List<Receipt> receipts = db.Receipts
+                        .Include(receipt => receipt.Currency).ToList();
                     return Ok(receipts);
                 }
             }
@@ -36,15 +38,11 @@ namespace AxosnetAPI.Controllers
         // GET: api/Receipts/GetById/5
         // Get Receipt data from valid id
         [HttpGet("{id:int?}")]
+        [ServiceFilter(typeof(ValidateEntityExists<Receipt>))]
         public ActionResult GetById(int? id)
         {
             try
             {
-                if(id ==  null)
-                {
-                    return NotFound();
-                }
-
                 using (db = new AxosnetAPIContext())
                 {
                     Receipt receipt = db.Receipts.
@@ -65,10 +63,27 @@ namespace AxosnetAPI.Controllers
             }
         }
 
-        // POST: api/Receipts
+        // POST: api/Receipts/Create
+        // Insert receipt data in database
         [HttpPost]
-        public void Post([FromBody] Receipt receipt)
+        [ServiceFilter(typeof(ValidateModel<Receipt>))]
+        public ActionResult Create([Bind("ProviderCode,Amount,Date,Comments,IdCurrency")]
+                        [FromBody] Receipt receipt)
         {
+            try
+            {
+                using(db = new AxosnetAPIContext())
+                {
+                    db.Add(receipt);
+                    db.SaveChanges();
+
+                    return Ok(receipt);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         // PUT: api/Receipts/5
