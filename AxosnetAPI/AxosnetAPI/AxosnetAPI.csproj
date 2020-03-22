@@ -27,5 +27,9 @@
   <ItemGroup>
     <Content Remove="Views\Currencies\Delete.cshtml" />
     <Content Remove="Views\Receipts\Create.cshtml" />
+    <Content Remove="Views\Currencies\Edit.cshtml" />
+    <Content Remove="Views\Currencies\Create.cshtml" />
+    <Content Remove="Views\Currencies\Index.cshtml" />
+    <Content Remove="Views\Currencies\Details.cshtml" />
   </ItemGroup>
 </Project>
