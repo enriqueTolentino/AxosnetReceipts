@@ -8,6 +8,7 @@ namespace AxosnetAPI.Models
     {
         public AxosnetAPIContext() { }
 
+        // If is necessary for scaffold
         public AxosnetAPIContext(DbContextOptions<AxosnetAPIContext> options)
         : base(options)
         { }
