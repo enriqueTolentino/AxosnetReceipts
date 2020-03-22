@@ -82,6 +82,7 @@ namespace AxosnetAPI.Controllers
         }
 
         // Post: api/Receipts/5
+        // Update receipt data in database
         [HttpPost("{id:int?}")]
         [ServiceFilter(typeof(ValidateEntityExists<Receipt>))]
         [ServiceFilter(typeof(ValidateModel<Receipt>))]
@@ -105,6 +106,7 @@ namespace AxosnetAPI.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        // Delete a row data in receipt table
         [HttpDelete("{id:int?}")]
         [ServiceFilter(typeof(ValidateEntityExists<Receipt>))]
         public ActionResult Delete(int? id)
