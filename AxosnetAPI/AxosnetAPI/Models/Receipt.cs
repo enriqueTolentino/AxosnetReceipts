@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,10 +21,10 @@ namespace AxosnetAPI.Models
             ErrorMessage = "The Amount cannot be negative")]
         [RegularExpression(@"^\d+\.\d{0,2}$",
             ErrorMessage = "The Amount cannot be more than two decimal places")]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [StringLength(500, ErrorMessage = "The Comments cannot exceed more than 500 characters")]
         public string Comments { get; set; }
@@ -31,7 +32,7 @@ namespace AxosnetAPI.Models
         //Relation to Currency
         [Required]
         [ForeignKey("Currency")]
-        public int IdCurrency { get; set; }
+        public int? IdCurrency { get; set; }
         public Currency Currency { get; set; }
     }
 }
