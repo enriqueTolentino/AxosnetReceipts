@@ -34,7 +34,6 @@ namespace AxosnetAPI
             // Model validations with filters
             services.AddScoped<ValidateModel<Receipt>>();
             services.AddScoped<ValidateEntityExists<Receipt>>();
-            services.AddScoped<ValidateModel<Currency>>();
             services.AddScoped<ValidateEntityExists<Currency>>();
         }
 
