@@ -6,9 +6,6 @@ namespace AxosnetAPI.Models
 {
     public class AxosnetAPIContext : DbContext
     {
-        //private string connectionString =
-        //    "Server=localhost;Database=AxosnetAPIDB;User Id=sa;Password=Tolentino1;";
-
         public AxosnetAPIContext() { }
 
         public AxosnetAPIContext(DbContextOptions<AxosnetAPIContext> options)
