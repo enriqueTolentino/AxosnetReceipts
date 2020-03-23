@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bulma/css/bulma.css';
+import './css/Spacing.css';
 import './css/App.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
