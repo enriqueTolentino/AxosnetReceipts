@@ -17,9 +17,9 @@ export class ReceiptDelete extends Component {
 
 		if (ok) {
 			this.props.activeDeleteModal({});
-        }
-        
-        this.setState({
+		}
+
+		this.setState({
 			loading: false
 		});
 	};
