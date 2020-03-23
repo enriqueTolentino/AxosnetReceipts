@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const initialState = {
 	menuActivo: false
-	// sesion: null
 };
 
 export class Header extends Component {
@@ -43,9 +42,6 @@ export class Header extends Component {
 					<div className="navbar-start">
 						<NavbarItem pathlink="/" textlink="Home" />
 					</div>
-					{/* <div className="navbar-end">
-						<UsuarioHeader />
-					</div> */}
 				</div>
 			</nav>
 		);
