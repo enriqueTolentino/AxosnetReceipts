@@ -7,6 +7,7 @@ import Header from './components/layout/Header';
 // View Imports
 import Home from './views/Home';
 import ReceiptsIndex from './views/receipts/Index';
+import ReceipstCreate from './views/receipts/Create';
 
 function App() {
 	return (
@@ -16,6 +17,8 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/receipts" component={ReceiptsIndex} />
+					<Route exact path="/receipts/create" component={ReceipstCreate} />
+
 					{/* <Route exact path="/login" component={Login} /> */}
 				</Switch>
 			</Fragment>

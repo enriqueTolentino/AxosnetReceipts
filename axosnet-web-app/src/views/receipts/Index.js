@@ -26,7 +26,7 @@ export class ReceiptsIndex extends Component {
 					<div className="card container">
 						<div className="card-content">
 							<h3 className="title">My Receipts</h3>
-							<Link to="/receipts/create" className="button is-primary">
+							<Link to="/receipts/create" className="button is-link">
 								<i className="fas fa-plus fa-fw" />New Receipt
 							</Link>
 							<div className="table-container m-t-md">
