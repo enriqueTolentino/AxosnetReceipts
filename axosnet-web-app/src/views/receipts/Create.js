@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import ReceiptsService from '../../services/ReceiptsService';
 import ReceiptForm from '../../components/receipts/Form';
+import { Redirect } from 'react-router-dom';
 
 const initialState = {
 	receipt: {
@@ -7,25 +9,42 @@ const initialState = {
 		providerCode: '',
 		amount: '',
 		comments: '',
-        idCurrency: '',
-        date: new Date()
+		idCurrency: '',
+		date: new Date()
 	},
 	redirect: false
 };
 
 export class ReceipstCreate extends Component {
 	state = initialState;
+
+	receiptsService = new ReceiptsService();
+
+	createSubmit = async (receipt) => {
+		const id = await this.receiptsService.Create(receipt);
+
+		if (id > 0) {
+			this.setState({
+				redirect: true
+			});
+		}
+	};
+
 	render() {
-		const { receipt } = this.state;
+		const { receipt, redirect } = this.state;
+		const redirectRender = redirect ? <Redirect to="/receipts" /> : '';
 		return (
-			<div className="section">
-				<div className="card container">
-					<div className="card-content">
-						<h3 className="title">New Receipt</h3>
-						<ReceiptForm receipt={receipt} />
+			<Fragment>
+				{redirectRender}
+				<div className="section">
+					<div className="card container">
+						<div className="card-content">
+							<h3 className="title">New Receipt</h3>
+							<ReceiptForm receipt={receipt} formSubmit={this.createSubmit} />
+						</div>
 					</div>
 				</div>
-			</div>
+			</Fragment>
 		);
 	}
 }

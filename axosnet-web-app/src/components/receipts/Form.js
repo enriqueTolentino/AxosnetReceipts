@@ -29,11 +29,17 @@ export class ReceiptForm extends Component {
 		});
 	};
 
+	handleSubmit = (e) => {
+		e.preventDefault();
+
+		this.props.formSubmit(this.state.receipt);
+	};
+
 	render() {
 		const { providerCode, amount, idCurrency, date, comments } = this.state.receipt;
 		const { currencies } = this.state;
 		return (
-			<form>
+			<form onSubmit={this.handleSubmit}>
 				<div className="field">
 					<label className="label">Provider</label>
 					<div className="control">

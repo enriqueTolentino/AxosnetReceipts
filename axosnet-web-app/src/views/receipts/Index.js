@@ -52,7 +52,7 @@ export class ReceiptsIndex extends Component {
 													)}
 												</td>
 												<td>{receipt.providerCode}</td>
-												<td>{formatNumber.new(receipt.amount, '$')}</td>
+												<td>{formatNumber.new(parseFloat(receipt.amount).toFixed(2), '$')}</td>
 												<td>{receipt.currency.code}</td>
 												<td>
 													<Link
