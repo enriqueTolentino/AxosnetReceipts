@@ -24,5 +24,6 @@ namespace AxosnetAPI.Models
 
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
