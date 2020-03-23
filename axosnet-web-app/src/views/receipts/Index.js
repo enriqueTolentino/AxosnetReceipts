@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import ReceiptsService from '../../services/ReceiptsService';
 import { formatDate, formatNumber, convertUTCDateToLocalDate } from '../../helpers/Formats';
+import ReceiptDelete from '../../components/receipts/Delete';
 
 const initialState = {
-	receipts: []
+	receipts: [],
+	receiptDelete: {},
+	modalActive: false
 };
 
 export class ReceiptsIndex extends Component {
@@ -18,8 +21,21 @@ export class ReceiptsIndex extends Component {
 		});
 	}
 
+	activeDeleteModal = async (receiptDelete) => {
+		this.setState({
+			modalActive: !this.state.modalActive,
+			receiptDelete,
+			receipts: await this.receiptsService.GetAllReceipts()
+		});
+	};
+
 	render() {
-		const { receipts } = this.state;
+		const { receipts, receiptDelete, modalActive } = this.state;
+		const modalDelete = modalActive ? (
+			<ReceiptDelete idReceipt={receiptDelete.idReceipt} activeDeleteModal={this.activeDeleteModal} />
+		) : (
+			''
+		);
 		return (
 			<Fragment>
 				<div className="section">
@@ -61,9 +77,12 @@ export class ReceiptsIndex extends Component {
 													>
 														<i className="fas fa-edit fa-fw" />Edit
 													</Link>
-													<Link to="/receipts/create" className="button is-small is-danger">
+													<button
+														className="button is-small is-danger"
+														onClick={() => this.activeDeleteModal(receipt)}
+													>
 														<i className="fas fa-trash-alt fa-fw" />Delete
-													</Link>
+													</button>
 												</td>
 											</tr>
 										))}
@@ -73,6 +92,7 @@ export class ReceiptsIndex extends Component {
 						</div>
 					</div>
 				</div>
+				{modalDelete}
 			</Fragment>
 		);
 	}

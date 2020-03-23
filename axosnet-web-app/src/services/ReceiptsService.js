@@ -72,6 +72,22 @@ class ReceiptsService {
 			});
 		return id;
 	};
+
+	Delete = async (idReceipt) => {
+		let ok;
+		await API.delete(`Receipts/Delete/${idReceipt}`)
+			.then((res) => {
+				ok = true;
+				Notification['success']('Receipt was deleted successfully', { duration: 5 });
+			})
+			.catch((error) => {
+				console.log(error);
+				ok = false;
+				Notification['error']('Error', { duration: 5 });
+			});
+
+		return ok;
+	};
 }
 
 export default ReceiptsService;
