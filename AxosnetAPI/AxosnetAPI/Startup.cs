@@ -31,6 +31,8 @@ namespace AxosnetAPI
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddCors();
+
             // Model validations with filters
             services.AddScoped<ValidateModel<Receipt>>();
             services.AddScoped<ValidateEntityExists<Receipt>>();
@@ -50,6 +52,10 @@ namespace AxosnetAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {
