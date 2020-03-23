@@ -14,7 +14,7 @@ export class SignUp extends Component {
 							</div>
 							<form>
 								<div className="field">
-									<label className="label">User</label>
+									<label className="label"><i class="fas fa-user fa-fw" />User</label>
 									<div className="control">
 										<input
 											className="input"
@@ -28,7 +28,7 @@ export class SignUp extends Component {
 									</div>
 								</div>
 								<div className="field">
-									<label className="label">Password</label>
+									<label className="label"><i class="fas fa-key fa-fw" />Password</label>
 									<div className="control">
 										<input
 											className="input"
