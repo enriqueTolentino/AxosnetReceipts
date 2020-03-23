@@ -59,10 +59,10 @@ export class ReceiptsIndex extends Component {
 														to={'/receipts/edit/' + receipt.idReceipt}
 														className="button is-small is-primary m-r-sm"
 													>
-														<i class="fas fa-edit fa-fw" />Edit
+														<i className="fas fa-edit fa-fw" />Edit
 													</Link>
 													<Link to="/receipts/create" className="button is-small is-danger">
-														<i class="fas fa-trash-alt fa-fw" />Delete
+														<i className="fas fa-trash-alt fa-fw" />Delete
 													</Link>
 												</td>
 											</tr>

@@ -17,6 +17,12 @@ export class ReceiptForm extends Component {
 		this.setState({
 			currencies: await this.currenciesService.GetAllCurrencies()
 		});
+    }
+    
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            receipt: nextProps.receipt
+        });
 	}
 
 	updateState = (e) => {

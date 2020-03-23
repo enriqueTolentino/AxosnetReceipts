@@ -8,6 +8,7 @@ import Header from './components/layout/Header';
 import Home from './views/Home';
 import ReceiptsIndex from './views/receipts/Index';
 import ReceipstCreate from './views/receipts/Create';
+import ReceipstEdit from './views/receipts/Edit';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/receipts" component={ReceiptsIndex} />
 					<Route exact path="/receipts/create" component={ReceipstCreate} />
+					<Route exact path="/receipts/edit/:id" component={ReceipstEdit} />
 
 					{/* <Route exact path="/login" component={Login} /> */}
 				</Switch>
