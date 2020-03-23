@@ -150,5 +150,22 @@ namespace AxosnetAPI.BusinessLogic
                 email = user.Email
             };
         }
+
+        // return true if not exists in database
+        public bool validateUserNotExists(string Email)
+        {
+            try
+            {
+                using (db = new AxosnetAPIContext())
+                {
+                    User user = db.Users.FirstOrDefault(u => u.Email == Email);
+                    return (user == null);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
