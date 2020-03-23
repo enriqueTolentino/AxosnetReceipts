@@ -38,7 +38,7 @@ export class ReceiptDelete extends Component {
 					<section className="modal-card-body">
 						<div className="columns is-mobile">
 							<div className="column has-text-centered">
-								<p>Are u sure?</p>
+								<p>Are you sure?</p>
 							</div>
 						</div>
 					</section>
