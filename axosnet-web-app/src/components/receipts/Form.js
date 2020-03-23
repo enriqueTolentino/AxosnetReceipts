@@ -17,12 +17,12 @@ export class ReceiptForm extends Component {
 		this.setState({
 			currencies: await this.currenciesService.GetAllCurrencies()
 		});
-    }
-    
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            receipt: nextProps.receipt
-        });
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			receipt: nextProps.receipt
+		});
 	}
 
 	updateState = (e) => {
@@ -37,8 +37,17 @@ export class ReceiptForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
+		if (!this.state.loading) {
+			this.setState({
+				loading: true
+			});
 
-		this.props.formSubmit(this.state.receipt);
+			this.props.formSubmit(this.state.receipt);
+			
+			this.setState({
+				loading: false
+			});
+		}
 	};
 
 	render() {

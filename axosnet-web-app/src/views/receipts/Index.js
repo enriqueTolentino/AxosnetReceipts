@@ -73,7 +73,7 @@ export class ReceiptsIndex extends Component {
 												<td>
 													<Link
 														to={'/receipts/edit/' + receipt.idReceipt}
-														className="button is-small is-primary m-r-sm"
+														className="button is-small is-success m-r-sm"
 													>
 														<i className="fas fa-edit fa-fw" />Edit
 													</Link>
