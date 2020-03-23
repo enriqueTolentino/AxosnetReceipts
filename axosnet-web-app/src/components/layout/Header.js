@@ -21,7 +21,7 @@ export class Header extends Component {
 	render() {
         
 		return (
-			<nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+			<nav className="navbar is-link" role="navigation" aria-label="main navigation">
 				<div className="navbar-brand">
 					<Link to="/" className="navbar-item has-text-weight-bold">
 						Axosnet Receipts
@@ -41,6 +41,7 @@ export class Header extends Component {
 				<div className={'is-primary navbar-menu  ' + (this.state.menuActivo ? 'is-active' : '')}>
 					<div className="navbar-start">
 						<NavbarItem pathlink="/" textlink="Home" />
+						<NavbarItem pathlink="/receipts" textlink="My Receipts" />
 					</div>
 				</div>
 			</nav>

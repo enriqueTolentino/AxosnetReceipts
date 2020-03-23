@@ -6,18 +6,18 @@ import Header from './components/layout/Header';
 
 // View Imports
 import Home from './views/Home';
+import ReceiptsIndex from './views/receipts/Index';
 
 function App() {
 	return (
 		<Router>
 			<Fragment>
 				<Header />
-				<div className="container is-fluid site-content">
-					<Switch>
-						<Route exact path="/" component={Home} />
-						{/* <Route exact path="/login" component={Login} /> */}
-					</Switch>
-				</div>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/receipts" component={ReceiptsIndex} />
+					{/* <Route exact path="/login" component={Login} /> */}
+				</Switch>
 			</Fragment>
 		</Router>
 	);
