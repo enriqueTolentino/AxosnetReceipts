@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ReceiptsService from '../../services/ReceiptsService';
 import { formatDate, formatNumber, convertUTCDateToLocalDate } from '../../helpers/Formats';
 import ReceiptDelete from '../../components/receipts/Delete';
+import CheckSession from '../../components/auth/CheckSession';
 
 const initialState = {
 	receipts: [],
@@ -38,6 +39,7 @@ export class ReceiptsIndex extends Component {
 		);
 		return (
 			<Fragment>
+				<CheckSession />
 				<div className="section">
 					<div className="card container">
 						<div className="card-content">

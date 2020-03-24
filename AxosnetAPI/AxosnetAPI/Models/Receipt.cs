@@ -34,5 +34,10 @@ namespace AxosnetAPI.Models
         [ForeignKey("Currency")]
         public int? IdCurrency { get; set; }
         public Currency Currency { get; set; }
+
+        //Relation to User
+        [ForeignKey("User")]
+        public int? IdUser { get; set; }
+        public User User { get; set; }
     }
 }
