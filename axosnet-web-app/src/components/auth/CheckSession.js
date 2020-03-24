@@ -9,7 +9,7 @@ class CheckSession extends Component {
         const {pathname} = this.props.location;
         const isAuthorized = await this.authService.GetUserSession();
         console.log(isAuthorized, pathname);
-		if (!isAuthorized && (pathname !== "/login" || pathname !== "/signup")) {
+		if (!isAuthorized && (pathname !== "/signup")) {
 			this.props.history.push('/login');
         }
         else if(isAuthorized && (pathname === '/login' || pathname === '/signup')){
