@@ -49,6 +49,7 @@ namespace AxosnetAPI.Controllers
             {
                 if (authLogic.validateUserNotExists(user.Email))
                 {
+                    user.Password = authLogic.Encrypt(user.Password);
                     using (db = new AxosnetAPIContext())
                     {
                         db.Users.Add(user);

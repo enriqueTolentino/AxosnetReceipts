@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AxosnetAPI.Models;
 using AxosnetAPI.Models.ViewModels;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace AxosnetAPI.BusinessLogic
 {
@@ -14,6 +16,8 @@ namespace AxosnetAPI.BusinessLogic
     {
         private readonly IConfigurationRoot _configuration;
         private AxosnetAPIContext db;
+
+        private readonly string EncryptionKey = "MAKV2SPBNI99212";
 
         public AuthLogic()
         {
@@ -33,7 +37,7 @@ namespace AxosnetAPI.BusinessLogic
 
                     if (user != null)
                     {
-                        if (user.Password == login.password)
+                        if (Decrypt(user.Password) == login.password)
                         {
                             return user;
                         }
@@ -52,8 +56,6 @@ namespace AxosnetAPI.BusinessLogic
         {
             try
             {
-                //User user = loginValidate(login);
-
                 // Readd secret_key in appsettings
                 var secretKey = _configuration.GetValue<string>("SecretKey");
                 var key = Encoding.ASCII.GetBytes(secretKey);
@@ -166,6 +168,48 @@ namespace AxosnetAPI.BusinessLogic
             {
                 throw ex;
             }
+        }
+
+        public string Encrypt(string clearText)
+        {
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+
+        private string Decrypt(string cipherText)
+        {
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
         }
     }
 }
