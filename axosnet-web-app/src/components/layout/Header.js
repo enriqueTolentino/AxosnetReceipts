@@ -25,6 +25,13 @@ export class Header extends Component {
 		});
 	};
 
+	logOut = async (e) => {
+		e.preventDefault();
+
+		await localStorage.removeItem('@AxosnetReceipts.token', '');
+		window.location.reload();
+	};
+
 	render() {
 		const { isAuthorized, menuActivo } = this.state;
 		const renderMenu = isAuthorized ? (
@@ -34,7 +41,9 @@ export class Header extends Component {
 					<NavbarItem pathlink="/receipts" textlink="My Receipts" />
 				</div>
 				<div className="navbar-end">
-					Log Out
+					<a onClick={this.logOut} className="navbar-item">
+						Log Out
+					</a>
 				</div>
 			</div>
 		) : (
