@@ -6,16 +6,16 @@ export class LogIn extends Component {
 		return (
 			<div className="section">
 				<div className="columns">
-					<div class="card column is-half is-offset-one-quarter">
-						<div class="card-content">
+					<div className="card column is-half is-offset-one-quarter">
+						<div className="card-content">
 							<div className="has-text-centered">
-								<h3 class="title">Axosnet</h3>
-								<h1 class="subtitle">Sign in</h1>
+								<h3 className="title">Axosnet</h3>
+								<h1 className="subtitle">Sign in</h1>
 							</div>
 							<form>
 								<div className="field">
 									<label className="label">
-										<i class="fas fa-user fa-fw" />User
+										<i className="fas fa-user fa-fw" />User
 									</label>
 									<div className="control">
 										<input
@@ -31,7 +31,7 @@ export class LogIn extends Component {
 								</div>
 								<div className="field">
 									<label className="label">
-										<i class="fas fa-key fa-fw" />Password
+										<i className="fas fa-key fa-fw" />Password
 									</label>
 									<div className="control">
 										<input

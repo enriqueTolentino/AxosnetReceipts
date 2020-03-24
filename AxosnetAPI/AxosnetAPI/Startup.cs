@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AxosnetAPI.Models.ViewModels;
 
 namespace AxosnetAPI
 {
@@ -60,6 +61,8 @@ namespace AxosnetAPI
             services.AddScoped<ValidateModel<Receipt>>();
             services.AddScoped<ValidateEntityExists<Receipt>>();
             services.AddScoped<ValidateEntityExists<Currency>>();
+            services.AddScoped<ValidateModel<LoginViewModel>>();
+            services.AddScoped<ValidateModel<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

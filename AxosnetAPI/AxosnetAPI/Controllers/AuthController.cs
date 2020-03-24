@@ -47,11 +47,11 @@ namespace AxosnetAPI.Controllers
                         db.Users.Add(user);
                         db.SaveChanges();
 
-                        return Ok(user);
+                        return Ok();
                     }
                 }
 
-                return BadRequest("The user already exists");
+                return BadRequest(new { errorMessage = "The user already exists" });
             }
             catch (Exception ex)
             {
