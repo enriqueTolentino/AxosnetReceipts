@@ -25,7 +25,14 @@ namespace AxosnetAPI.Controllers
         {
             try
             {
-                return Ok(new TokenViewModel { token = authLogic.generarTokenSession(login) });
+                User user = authLogic.loginValidate(login);
+
+                if(user == null)
+                {
+                    return BadRequest(new { errorMessage = "Invalid Email or Password" });
+                }
+
+                return Ok(new TokenViewModel { token = authLogic.generarTokenSession(user) });
             }
             catch (Exception ex)
             {
@@ -69,7 +76,7 @@ namespace AxosnetAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return StatusCode(500, ex);
             }
         }
     }

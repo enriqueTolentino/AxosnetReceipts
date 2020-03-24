@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AxosnetAPI.Models;
 using AxosnetAPI.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AxosnetAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class CurrenciesController : ControllerBase

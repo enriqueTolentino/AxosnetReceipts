@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const getToken = () => {
     const token = localStorage.getItem('@AxosnetReceipts.token');
-
     return token ? token : '';
 };
 

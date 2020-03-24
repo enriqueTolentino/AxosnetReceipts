@@ -23,7 +23,7 @@ namespace AxosnetAPI.BusinessLogic
                 .Build();
         }
 
-        private User loginValidate(LoginViewModel login)
+        public User loginValidate(LoginViewModel login)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace AxosnetAPI.BusinessLogic
                     }
                 }
 
-                throw new Exception("Invalid User or password");
+                return null;
             }
             catch (Exception ex)
             {
@@ -48,11 +48,11 @@ namespace AxosnetAPI.BusinessLogic
             }
         }
 
-        public string generarTokenSession(LoginViewModel login)
+        public string generarTokenSession(User user)
         {
             try
             {
-                User user = loginValidate(login);
+                //User user = loginValidate(login);
 
                 // Readd secret_key in appsettings
                 var secretKey = _configuration.GetValue<string>("SecretKey");

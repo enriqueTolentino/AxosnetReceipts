@@ -8,7 +8,7 @@ class CheckSession extends Component {
 	async componentWillMount() {
         const {pathname} = this.props.location;
         const isAuthorized = await this.authService.GetUserSession();
-        console.log(isAuthorized, pathname);
+        //console.log(isAuthorized, pathname);
 		if (!isAuthorized && (pathname !== "/signup")) {
 			this.props.history.push('/login');
         }

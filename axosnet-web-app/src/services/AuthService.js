@@ -42,10 +42,44 @@ class AuthService {
 				ok = true;
 			})
 			.catch((error) => {
+				console.log(error);
 				ok = false;
 			});
+
+		//console.log(ok,ok)
 		return ok;
-	}
+	};
+
+	Login = async (login) => {
+		let ok = false;
+		await API.post(`Auth/Login`, login)
+			.then((res) => {
+				console.log(res);
+				localStorage.setItem('@AxosnetReceipts.token', res.data.token);
+				ok = true;
+			})
+			.catch(({ response: { data } }) => {
+				if (data.errorMessage) {
+					Notification['error'](data.errorMessage, { duration: 5 });
+				} else if (data.errors) {
+					if (data.errors.Password) {
+						data.errors.Password.forEach((errorMessage) => {
+							Notification['error'](errorMessage, { duration: 5 });
+						});
+					}
+
+					if (data.errors.Email) {
+						data.errors.Email.forEach((errorMessage) => {
+							Notification['error'](errorMessage, { duration: 5 });
+						});
+					}
+				} else {
+					console.log(data);
+					Notification['error']('Error', { duration: 5 });
+				}
+			});
+		return ok;
+	};
 }
 
 export default AuthService;

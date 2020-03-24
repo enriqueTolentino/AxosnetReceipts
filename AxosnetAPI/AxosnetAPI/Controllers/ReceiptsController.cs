@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using AxosnetAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using AxosnetAPI.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AxosnetAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ReceiptsController : ControllerBase
