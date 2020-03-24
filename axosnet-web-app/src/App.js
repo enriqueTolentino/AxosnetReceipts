@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components Import
 import Header from './components/layout/Header';
+import Session from './components/auth/CheckSession';
 
 // View Imports
 import Home from './views/Home';

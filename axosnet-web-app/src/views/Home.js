@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react';
+import CheckSession from '../components/auth/CheckSession';
 
 export class Home extends Component {
-    render() {
-        return (
-            <div>
-                This is home
-            </div>
-        )
-    }
+	render() {
+		return (
+			<Fragment>
+				<CheckSession />
+				<div>This is home</div>
+			</Fragment>
+		);
+	}
 }
 
-export default Home
+export default Home;

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ReceiptsService from '../../services/ReceiptsService';
 import ReceiptForm from '../../components/receipts/Form';
 import { Redirect } from 'react-router-dom';
+import CheckSession from '../../components/auth/CheckSession';
 
 const initialState = {
 	receipt: {
@@ -35,6 +36,7 @@ export class ReceipstCreate extends Component {
 		const redirectRender = redirect ? <Redirect to="/receipts" /> : '';
 		return (
 			<Fragment>
+				<CheckSession />
 				{redirectRender}
 				<div className="section">
 					<div className="card container">

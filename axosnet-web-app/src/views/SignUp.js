@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import AuthService from '../services/AuthService';
+import CheckSession from '../components/auth/CheckSession';
 
 const initialState = {
 	user: {
@@ -34,7 +35,7 @@ export class SignUp extends Component {
 				loading: true
 			});
 
-			const ok = await this.authService.Create(this.state.user);
+			const ok = await this.authService.CreateUser(this.state.user);
 
 			if (ok) {
 				this.setState({
@@ -55,6 +56,7 @@ export class SignUp extends Component {
 		const redirectRender = redirect ? <Redirect to="/login" /> : '';
 		return (
 			<Fragment>
+				<CheckSession />
 				{redirectRender}
 				<div className="section">
 					<div className="columns">
